@@ -28,7 +28,7 @@ To view the website locally:
 
 ## Deployment
 
-This website is deployed using GitHub Pages and can be accessed at [https://github.com/username/tech-west-coast](https://github.com/username/tech-west-coast)
+This website is deployed using GitHub Pages and can be accessed at [https://beaux-riel.github.io/tech-west-coast/](https://beaux-riel.github.io/tech-west-coast/)
 
 ## License
 
