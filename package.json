@@ -1,0 +1,24 @@
+{
+  "name": "tech-west-coast-new",
+  "version": "1.0.0",
+  "description": "A modern, responsive portfolio website for Tech West Coast, showcasing software development skills, projects, and services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beaux-riel/tech-west-coast.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beaux-riel/tech-west-coast/issues"
+  },
+  "homepage": "https://github.com/beaux-riel/tech-west-coast#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
