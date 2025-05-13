@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechWestCoast | Code. Create. Caffeinate.</title>
+    <style>
+        /* Color variables */
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffe66d;
+            --dark: #292f36;
+            --light: #f7fff7;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: var(--gradient);
+            padding: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            background-color: var(--dark);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .code-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+            overflow: hidden;
+            user-select: none;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .highlight {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            margin: 0 0.5rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .section {
+            padding: 5rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            padding: 0 1rem;
+            background-color: var(--light);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--primary);
+        }
+        
+        .card-content {
+            padding: 2rem;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .projects {
+            background-color: rgba(78, 205, 196, 0.1);
+        }
+        
+        .project-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 2rem;
+            transform: translateY(70%);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+        
+        .project-info h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .tech-stack {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tech-tag {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .fun-facts {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .fun-facts h2 {
+            color: var(--accent);
+            margin-bottom: 3rem;
+        }
+        
+        .facts-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .fact {
+            flex: 1 1 250px;
+            max-width: 300px;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .fact:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .fact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .fact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact {
+            text-align: center;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.3);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-nav {
+            margin: 1.5rem 0;
+        }
+        
+        .footer-nav a {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-nav a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Terminal styling */
+        .terminal {
+            background-color: var(--dark);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+            margin: 3rem auto;
+            max-width: 800px;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-right: 1rem;
+        }
+        
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .button-red {
+            background-color: #ff5f56;
+        }
+        
+        .button-yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .button-green {
+            background-color: #27c93f;
+        }
+        
+        .terminal-title {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+        }
+        
+        .terminal-body {
+            line-height: 1.4;
+        }
+        
+        .command-line {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        
+        .prompt {
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+        
+        .command {
+            color: white;
+        }
+        
+        .output {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1rem;
+            background-color: var(--accent);
+            animation: blink 1s step-end infinite;
+            margin-left: 0.2rem;
+            vertical-align: middle;
+        }
+        
+        @keyframes blink {
+            from, to {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        /* Floating elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 15s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+            }
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.7rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Tech<span>WestCoast</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="code-bg">
+            function createAwesomeWebsite() {<br>
+            &nbsp;&nbsp;const passion = "coding";<br>
+            &nbsp;&nbsp;const caffeine = 100;<br>
+            &nbsp;&nbsp;const bugs = [];<br>
+            &nbsp;&nbsp;while (passion) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;drinkCoffee(caffeine);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;writeCode();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;if (bugs.length > 0) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixBugs();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log("Another day, another debugging adventure!");<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;return amazingWebsite;<br>
+            }
+        </div>
+        <div class="hero-content">
+            <h1>Hello, World! I'm a <span class="highlight">Software Developer</span> on the West Coast</h1>
+            <p>Turning coffee into code and problems into solutions, one bug at a time.</p>
+            <div>
+                <a href="#contact" class="btn">Get in Touch</a>
+                <a href="#projects" class="btn btn-secondary">See My Work</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <div class="terminal-button button-red"></div>
+                        <div class="terminal-button button-yellow"></div>
+                        <div class="terminal-button button-green"></div>
+                    </div>
+                    <div class="terminal-title">developer@techwestcoast:~</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="command-line">
+                        <div class="prompt">$</div>
+                        <div class="command">whoami</div>
+                    </div>
+                    <div class="output">
+                        West Coast based software developer passionate about creating clean, efficient, and user-friendly applications.
+                    </div>
+                    <div class="command-line">
+                        <div class="prompt">$</div>
+                        <div class="command">cat interests.txt</div>
+                    </div>
+                    <div class="output">
+                        - Web Development<br>
+                        - Mobile Apps<br>
+                        - UI/UX Design<br>
+                        - Open Source Contribution<br>
+                        - Hiking & Exploring the West Coast
+                    </div>
+                    <div class="command-line">
+                        <div class="prompt">$</div>
+                        <div class="command">echo $PHILOSOPHY</div>
+                    </div>
+                    <div class="output">
+                        "Code is like humor. When you have to explain it, it's bad."
+                    </div>
+                    <div class="command-line">
+                        <div class="prompt">$</div>
+                        <div class="command">./get_more_info</div><span class="cursor"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Toolkit</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">🖥️</div>
+                    <div class="card-content">
+                        <h3>Frontend</h3>
+                        <p>Creating beautiful, responsive interfaces with modern tools and frameworks.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Vue</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <div class="card-content">
+                        <h3>Backend</h3>
+                        <p>Building robust server-side applications and APIs that scale.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">NoSQL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <div class="card-content">
+                        <h3>Mobile</h3>
+                        <p>Developing cross-platform mobile applications with native feel.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Swift</span>
+                            <span class="tech-tag">Kotlin</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <div class="card-content">
+                        <h3>DevOps</h3>
+                        <p>Streamlining development workflow and deployment processes.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">CI/CD</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Azure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section projects" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+            </div>
+            <div class="grid">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400" alt="Project 1">
+                    <div class="project-info">
+                        <h3>EcoTracker App</h3>
+                        <p>A mobile application helping users track and reduce their carbon footprint through daily habits.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400" alt="Project 2">
+                    <div class="project-info">
+                        <h3>DevConnect Platform</h3>
+                        <p>A social network for developers to share projects, collaborate, and find mentorship opportunities.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">MERN Stack</span>
+                            <span class="tech-tag">GraphQL</span>
+                            <span class="tech-tag">WebSockets</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400" alt="Project 3">
+                    <div class="project-info">
+                        <h3>SmartBudget</h3>
+                        <p>Personal finance application with AI-powered insights and recommendations.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="fun-facts">
+        <div class="container">
+            <h2>Fun Developer Facts</h2>
+            <div class="facts-container">
+                <div class="fact">
+                    <div class="fact-icon">☕</div>
+                    <h3>Coffee Counter</h3>
+                    <p>Over 1,250 cups of coffee consumed during coding sessions</p>
+                </div>
+                
+                <div class="fact">
+                    <div class="fact-icon">⌨️</div>
+                    <h3>Code Marathon</h3>
+                    <p>Longest coding session: 16 hours (don't try this at home!)</p>
+                </div>
+                
+                <div class="fact">
+                    <div class="fact-icon">🐛</div>
+                    <h3>Bug Hunter</h3>
+                    <p>Most elusive bug took 3 days to find (it was a semicolon)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Blog Posts</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>The Rise of WebAssembly</h3>
+                        <p>Exploring how WebAssembly is changing the landscape of web development and enabling new possibilities.</p>
+                        <a href="#" class="btn btn-secondary">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Demystifying Microservices</h3>
+                        <p>A deep dive into microservices architecture and how it compares to monolithic approaches.</p>
+                        <a href="#" class="btn btn-secondary">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <h3>CSS Grid: A Game Changer</h3>
+                        <p>How CSS Grid has revolutionized web layouts and tips for mastering this powerful tool.</p>
+                        <a href="#" class="btn btn-secondary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="your.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-nav">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 TechWestCoast. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Form submission handling
+            const contactForm = document.querySelector('.contact-form form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const nameInput = document.getElementById('name');
+                    const emailInput = document.getElementById('email');
+                    const messageInput = document.getElementById('message');
+                    
+                    // Simple validation
+                    if (nameInput.value && emailInput.value && messageInput.value) {
+                        alert('Thanks for your message! I\'ll get back to you soon.');
+                        contactForm.reset();
+                    } else {
+                        alert('Please fill in all fields.');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
